@@ -1,3 +1,0 @@
-/home/thepanable/Homework/DSA/Lab01/build/CMakeFiles/chaining.dir
-/home/thepanable/Homework/DSA/Lab01/build/CMakeFiles/edit_cache.dir
-/home/thepanable/Homework/DSA/Lab01/build/CMakeFiles/rebuild_cache.dir
