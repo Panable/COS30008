@@ -1,12 +1,12 @@
 #include <iostream>
 void printIntArray(int aArray[], size_t aSize)
 {
-    std::cout << "[";
-    for (size_t i = 0; i < aSize; i++)
+    if (aSize == 0) return;
+
+    std::cout << "[" << aArray[0];
+    for (size_t i = 1; i < aSize; i++)
     {
-        std::cout << aArray[i];
-        if (i != aSize - 1) //last elem
-            std::cout << ", ";
+        std::cout << ", " << aArray[i];
     }
-    std::cout << "]";
+    std::cout << "]" << std::endl;;
 }
