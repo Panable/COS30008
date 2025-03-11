@@ -56,5 +56,5 @@ int main( int argc, char* argv[] )
     std::cout << "Scale factor: " << lFactor << std::endl;
     
     // return success
-	return 0;
+    return 0;
 }
