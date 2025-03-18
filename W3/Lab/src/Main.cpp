@@ -2,6 +2,7 @@
 // COS30008, tutorial 3, 2025
 
 #include <iostream>
+#include <vector>
 
 #include "Vector2D.h"
 #include "Vector3D.h"
@@ -70,6 +71,11 @@ int main()
     Matrix3x3 lS = Matrix3x3::getS( 3.2f, 3.2f );
     Matrix3x3 lR = Matrix3x3::getR( 90.0f );
     Matrix3x3 lT = Matrix3x3::getT( 4.0f, -1.0f );
+    //      Transormation  x   a3
+    //      
+    //      [3.2,     0,    0] [1]   [3.2*1 + 0*2   + 0*1]   [3.2]
+    //      [  0,   3.2,    0] [2] = [0*1   + 3.2*2 + 0*1] = [6.4]
+    //      [  0,     0,    1] [1]   [0*1   + 0*2   + 1*2]   [1.0]
     
     std::cout << "Scale " << a3 << " by " << 3.2f << " = " << lS * a3 << std::endl;
     std::cout << "Rotate " << b3 << " by " << 90.0f << " degrees = " << lR * b3 << std::endl;
