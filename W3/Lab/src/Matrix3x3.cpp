@@ -1,40 +1,42 @@
 #include "Matrix3x3.h"
 #include <cmath>
 Matrix3x3::Matrix3x3() noexcept
+    : fRows 
+    {
+        Vector3D(1.0f, 0.0f, 0.0f),
+        Vector3D(0.0f, 1.0f, 0.0f),
+        Vector3D(0.0f, 0.0f, 1.0f)
+    }
 {
 }
 
 Matrix3x3::Matrix3x3( const Vector3D& aRow1, const Vector3D& aRow2, const Vector3D& aRow3 ) noexcept
+    : fRows{aRow1, aRow2, aRow3}
 {
-    fRows[0] = aRow1;
-    fRows[1] = aRow2;
-    fRows[2] = aRow3;
 }
 
 Matrix3x3 Matrix3x3::operator*( const float aScalar ) const noexcept
 {
-    const Matrix3x3 M = *this;
-    return Matrix3x3({M[0][0] * aScalar, M[0][1] * aScalar, M[0][2] * aScalar},
-                     {M[1][0] * aScalar, M[1][1] * aScalar, M[1][2] * aScalar},
-                     {M[2][0] * aScalar, M[2][1] * aScalar, M[2][2] * aScalar});
+    const Matrix3x3& M = *this;
+    return Matrix3x3(M[0] * aScalar, M[1] * aScalar, M[2] * aScalar);
 }
 
 Matrix3x3 Matrix3x3::operator+( const Matrix3x3& aOther ) const noexcept
 {
 
-    const Matrix3x3 M = *this;
+    const Matrix3x3& M = *this;
     return Matrix3x3
     (
-        {M[0][0] + aOther[0][0], M[0][1] + aOther[0][1], M[0][2] + aOther[0][2]},
-        {M[1][0] + aOther[1][0], M[1][1] + aOther[1][1], M[1][2] + aOther[1][2]},
-        {M[2][0] + aOther[2][0], M[2][1] + aOther[2][1], M[2][2] + aOther[2][2]}
+        M[0] + aOther[0],
+        M[1] + aOther[1],
+        M[2] + aOther[2]
     );
 }
 
 Vector3D Matrix3x3::operator*( const Vector3D& aVector ) const noexcept
 {
 
-    const Matrix3x3 M = *this;
+    const Matrix3x3& M = *this;
 
     return Vector3D(M[0].dot(aVector), M[1].dot(aVector), M[2].dot(aVector));
 
@@ -68,7 +70,7 @@ Matrix3x3 Matrix3x3::getT( const float aX, const float aY ) noexcept
 Matrix3x3 Matrix3x3::getR( const float aAngleInDegree ) noexcept
 {
 
-    float lRadTheta = aAngleInDegree * static_cast<float>(std::numbers::pi) / 180.0f;
+    float lRadTheta = aAngleInDegree * std::numbers::pi_v<float> / 180.0f;
 
     float lSinTheta = std::sin( lRadTheta );
     float lCosTheta = std::cos( lRadTheta );
@@ -89,7 +91,7 @@ const Vector3D& Matrix3x3::row( size_t aRowIndex ) const noexcept
 
 const Vector3D Matrix3x3::column( size_t aColumnIndex ) const noexcept
 {
-    const Matrix3x3 M = *this;
+    const Matrix3x3& M = *this;
     assert(aColumnIndex < 3);
     return {
         M[0][aColumnIndex],
