@@ -16,7 +16,6 @@ private:
     DataMap* fData;
 
 public:
-        
     DataWrapper();
     ~DataWrapper();
     

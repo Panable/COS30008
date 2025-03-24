@@ -4,9 +4,9 @@
 #include <iostream>
 #include <cassert>
 
-#define P0
-#define P1
-#define P2
+// #define P0
+// #define P1
+// #define P2
 #define P3
 
 #ifdef P0
