@@ -8,6 +8,7 @@ DataWrapper::DataWrapper()
 
 DataWrapper::~DataWrapper()
 {
+    delete[] fData;
 }
 
 bool DataWrapper::load( const std::string& aFileName )
