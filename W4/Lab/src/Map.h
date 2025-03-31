@@ -18,6 +18,10 @@ class Map {
         template<typename U>
         operator U() const noexcept;
 
+        // friend std::istream& operator>>( std::istream& aIStream, Map& map );
+        //
+        // friend std::ostream& operator<<( std::ostream& aOStream, const Map& map );
+
         template <typename K, typename V>
         friend std::istream& operator>>( std::istream& aIStream, Map<K, V>& map );
 

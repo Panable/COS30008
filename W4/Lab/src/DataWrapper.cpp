@@ -1,5 +1,6 @@
 #include "DataWrapper.h"
 #include <fstream>
+#include <cassert>
 
 DataWrapper::DataWrapper()
     : fSize(0), fData(nullptr)
@@ -20,13 +21,18 @@ bool DataWrapper::load( const std::string& aFileName )
 
     file >> fSize;
     fData = new DataMap[fSize];
-    size_t key, value = 0;
+
     for (size_t i = 0; 
-         i < fSize && file >> key >> value; 
-         i++)
-    {
-        fData[i] = DataMap(key, value);
-    }
+         i < fSize && file >> fData[i]; 
+         i++);
+
+    // size_t key, value = 0;
+    // for (size_t i = 0; 
+    //      i < fSize && file >> key >> value; 
+    //      i++)
+    // {
+    //     fData[i] = DataMap(key, value);
+    // }
     return true;
 }
 
@@ -37,5 +43,6 @@ size_t DataWrapper::size() const noexcept
 
 const DataMap& DataWrapper::operator[]( size_t aIndex ) const
 {
+    assert(aIndex < fSize);
     return fData[aIndex];
 }
