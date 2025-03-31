@@ -61,5 +61,5 @@ Matrix3x3 Matrix3x3::inverse() const noexcept
 
 std::ostream& operator<<( std::ostream& aOStream, const Matrix3x3& aMatrix )
 {
-    return aOStream << "[" << aMatrix[0].toString() << aMatrix[1].toString() << aMatrix[2].toString() << "]";
+    return aOStream << "[" << aMatrix[0].toString() << "," << aMatrix[1].toString() << "," << aMatrix[2].toString() << "]";
 }

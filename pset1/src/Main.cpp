@@ -5,7 +5,7 @@
 #include <cmath>
 #include <numbers>
 
-// #define P1
+#define P1
 #define P2
 
 size_t gCount = 0;

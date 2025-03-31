@@ -1,0 +1,44 @@
+\documentclass[12pt, letterpaper]{article}
+\pagestyle{empty}
+\usepackage[a4paper, margin=2cm]{geometry} % Adjust margins as needed
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{tcolorbox}
+\usepackage{etoolbox}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage[md]{titlesec}
+\setminted{fontsize=\large}
+\newcommand{\includeminted}[3]
+{
+  \begin{center}
+  \textbf{#1}
+  \vspace{-5pt}
+  \inputminted[linenos, breaklines]{#2}{#3}
+  \end{center}
+}
+
+\newcommand{\mintbox}[3]
+{
+  \begin{center}
+  \textbf{#1}
+  \vspace{-5pt}
+  \begin{tcolorbox}
+  \inputminted[]{#2}{#3}
+  \end{tcolorbox}
+  \end{center}
+}
+
+\title{2.3P: Drawing Program -- A Basic Shape}
+\author{}
+\date{}
+
+\begin{document}
+\normalsize
+\includeminted{Figure 1: Vector3D\_PS1.cpp}{csharp}{../src/Vector3D_PS1.cpp}
+\clearpage
+\includeminted{Figure 2: Matrix3x3\_PS1.cpp}{csharp}{../src/Matrix3x3_PS1.cpp}
+\end{document}

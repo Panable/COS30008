@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{err}{\PYGZsh{}}\PYG{n}{include}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{n}{sstream}\PYG{o}{\PYGZgt{}}
+\PYG{err}{\PYGZsh{}}\PYG{n}{include}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Vector3D.h\PYGZdq{}}
+\PYG{err}{\PYGZsh{}}\PYG{n}{include}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{n}{cmath}\PYG{o}{\PYGZgt{}}
+
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{Vector3D}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Vector3D}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{std}\PYG{p}{::}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{x}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{x}\PYG{p}{())}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eps}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}
+\PYG{+w}{           }\PYG{n}{std}\PYG{p}{::}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{y}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{y}\PYG{p}{())}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eps}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}
+\PYG{+w}{           }\PYG{n}{std}\PYG{p}{::}\PYG{n}{abs}\PYG{p}{(}\PYG{n}{w}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{w}\PYG{p}{())}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eps}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{std}\PYG{p}{::}\PYG{k+kt}{string}\PYG{+w}{ }\PYG{n}{Vector3D}\PYG{p}{::}\PYG{n}{toString}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{std}\PYG{p}{::}\PYG{n}{stringstream}\PYG{+w}{ }\PYG{n}{ss}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{ss}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}[\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}]\PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{ss}\PYG{p}{.}\PYG{n}{str}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}
