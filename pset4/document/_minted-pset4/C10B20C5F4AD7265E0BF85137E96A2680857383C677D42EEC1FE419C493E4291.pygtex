@@ -1,0 +1,191 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{c+c1}{// COS30008, Problem Set 4, 2025}
+
+\PYG{c+cp}{\PYGZsh{}pragma once}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}DoublyLinkedList.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}DoublyLinkedListIterator.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}cassert\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}utility\PYGZgt{}}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{List}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{node}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{DoublyLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}::}\PYG{n}{node}\PYG{p}{;}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{n}{node}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{node}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{n}{fSize}\PYG{p}{;}
+\PYG{+w}{    }
+\PYG{k}{public}\PYG{o}{:}
+
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{iterator}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DoublyLinkedListIterator}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{List}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{	}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{(}\PYG{k}{nullptr}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{(}\PYG{k}{nullptr}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{fSize}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{o}{\PYGZti{}}\PYG{n}{List}\PYG{p}{()}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fTail}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{	    }\PYG{n}{node}\PYG{+w}{ }\PYG{n}{previous}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fTail}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{previous}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}
+\PYG{+w}{	    }\PYG{n}{fTail}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{();}
+\PYG{+w}{	    }\PYG{n}{fTail}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{previous}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{();}
+\PYG{+w}{	    }\PYG{n}{fTail}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{previous}\PYG{p}{;}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{n}{fHead}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// copy constructor}
+\PYG{+w}{    }\PYG{n}{List}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{	}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{fSize}\PYG{p}{(}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fSize}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{node}\PYG{+w}{ }\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fHead}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{cur}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{	    }\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{data}\PYG{p}{);}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// Copy assignment}
+\PYG{+w}{    }\PYG{n}{List}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{this}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{aOther}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{	    }\PYG{k}{this}\PYG{o}{\PYGZhy{}\PYGZgt{}\PYGZti{}}\PYG{n}{List}\PYG{p}{();}
+
+\PYG{+w}{	    }\PYG{k}{new}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{this}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{List}\PYG{p}{(}\PYG{n}{aOther}\PYG{p}{);}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// move constructor}
+\PYG{+w}{    }\PYG{n}{List}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{	}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{(}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fHead}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{(}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fTail}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{fSize}\PYG{p}{(}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fSize}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{c+c1}{// by setting all these things to nullptr}
+\PYG{+w}{	}\PYG{c+c1}{// the destructor won\PYGZsq{}t be able to destroy the aOther list.}
+\PYG{+w}{	}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{;}
+\PYG{+w}{	}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fTail}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{;}
+\PYG{+w}{	}\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fSize}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// Move assignment}
+\PYG{+w}{    }\PYG{n}{List}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{=}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{this}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{aOther}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{	    }\PYG{k}{this}\PYG{o}{\PYGZhy{}\PYGZgt{}\PYGZti{}}\PYG{n}{List}\PYG{p}{();}
+\PYG{+w}{	    }\PYG{n}{swap}\PYG{p}{(}\PYG{n}{aOther}\PYG{p}{);}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{swap}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{List}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{std}\PYG{o}{::}\PYG{n}{swap}\PYG{p}{(}\PYG{n}{fHead}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fHead}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{swap}\PYG{p}{(}\PYG{n}{fTail}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fTail}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{swap}\PYG{p}{(}\PYG{n}{fSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fSize}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// basic operations}
+\PYG{+w}{    }\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{n}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{fSize}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{U}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{push\PYGZus{}front}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{U}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{aData}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{node}\PYG{+w}{ }\PYG{n}{newNode}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DoublyLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}::}\PYG{n}{makeNode}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{n}{U}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{aData}\PYG{p}{));}
+\PYG{+w}{	}\PYG{n}{newNode}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{previous}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{();}
+\PYG{+w}{	}\PYG{n}{newNode}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fHead}\PYG{p}{)}
+\PYG{+w}{	    }\PYG{n}{fHead}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{previous}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{newNode}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{n}{fHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{newNode}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{fTail}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{// empty list}
+\PYG{+w}{	    }\PYG{n}{fTail}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{newNode}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{n}{fSize}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{U}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{U}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{aData}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{node}\PYG{+w}{ }\PYG{n}{newNode}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DoublyLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}::}\PYG{n}{makeNode}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{forward}\PYG{o}{\PYGZlt{}}\PYG{n}{U}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{n}{aData}\PYG{p}{));}
+\PYG{+w}{	}\PYG{n}{newNode}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{();}
+\PYG{+w}{	}\PYG{n}{newNode}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{previous}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fTail}\PYG{p}{)}
+\PYG{+w}{	    }\PYG{n}{fTail}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{newNode}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{n}{fTail}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{newNode}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{fHead}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{// empty list}
+\PYG{+w}{	    }\PYG{n}{fHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{newNode}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{n}{fSize}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{remove}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aElement}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{node}\PYG{+w}{ }\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{cur}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{	    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{data}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aElement}\PYG{p}{)}
+\PYG{+w}{	    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{)}
+\PYG{+w}{		    }\PYG{n}{fHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{;}
+\PYG{+w}{		}
+\PYG{+w}{		}\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{)}
+\PYG{+w}{		    }\PYG{n}{fTail}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{previous}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}
+
+\PYG{+w}{		}\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{isolate}\PYG{p}{();}
+
+\PYG{+w}{		}\PYG{n}{fSize}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{	    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	    }\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{;}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{p}{[](}\PYG{+w}{ }\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{n}{aIndex}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{assert}\PYG{p}{(}\PYG{n}{aIndex}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{fSize}\PYG{p}{);}
+
+\PYG{+w}{	}\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{	}\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{node}\PYG{+w}{ }\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fHead}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{cur}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{cur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{next}\PYG{p}{)}
+\PYG{+w}{	}\PYG{p}{\PYGZob{}}
+\PYG{+w}{	    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{o}{++}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aIndex}\PYG{p}{)}
+\PYG{+w}{		}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{cur}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{c+c1}{// iterator interface}
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{iterator}\PYG{p}{(}\PYG{n}{fHead}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{).}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{iterator}\PYG{p}{(}\PYG{n}{fHead}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{).}\PYG{n}{end}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{rbegin}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{iterator}\PYG{p}{(}\PYG{n}{fHead}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{).}\PYG{n}{rbegin}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{rend}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{iterator}\PYG{p}{(}\PYG{n}{fHead}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fTail}\PYG{p}{).}\PYG{n}{rend}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

@@ -1,0 +1,111 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}VigenereIterator.h\PYGZdq{}}
+
+\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{n}{VigenereIterator}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aKeyword}\PYG{p}{,}
+\PYG{+w}{                                   }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aSource}\PYG{p}{,}
+\PYG{+w}{                                   }\PYG{n}{EVigenereMode}\PYG{+w}{ }\PYG{n}{aMode}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{fMode}\PYG{p}{(}\PYG{n}{aMode}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{fKeys}\PYG{p}{(}\PYG{n}{aKeyword}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{fSource}\PYG{p}{(}\PYG{n}{aSource}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{fIndex}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{),}
+\PYG{+w}{      }\PYG{n}{fCurrentChar}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{initializeTable}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fMode}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{EVigenereMode}\PYG{o}{::}\PYG{n}{Encode}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{encodeCurrentChar}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{        }\PYG{n}{decodeCurrentChar}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{k}{operator}\PYG{o}{*}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{fCurrentChar}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{VigenereIterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{k}{operator}\PYG{o}{++}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{fIndex}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fMode}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{EVigenereMode}\PYG{o}{::}\PYG{n}{Encode}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{encodeCurrentChar}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{        }\PYG{n}{decodeCurrentChar}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{VigenereIterator}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{k}{operator}\PYG{o}{++}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{VigenereIterator}\PYG{+w}{ }\PYG{n}{old}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{    }\PYG{o}{++}\PYG{p}{(}\PYG{o}{*}\PYG{k}{this}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{old}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{fIndex}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fIndex}\PYG{+w}{ }
+\PYG{+w}{       }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{fSource}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fSource}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{VigenereIterator}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{VigenereIterator}\PYG{+w}{ }\PYG{n}{temp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{temp}\PYG{p}{.}\PYG{n}{fIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{temp}\PYG{p}{.}\PYG{n}{fKeys}\PYG{p}{.}\PYG{n}{reset}\PYG{p}{();}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{temp}\PYG{p}{.}\PYG{n}{fMode}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{EVigenereMode}\PYG{o}{::}\PYG{n}{Encode}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{temp}\PYG{p}{.}\PYG{n}{encodeCurrentChar}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{        }\PYG{n}{temp}\PYG{p}{.}\PYG{n}{decodeCurrentChar}\PYG{p}{();}
+
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{temp}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{VigenereIterator}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{VigenereIterator}\PYG{+w}{ }\PYG{n}{temp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{temp}\PYG{p}{.}\PYG{n}{fIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fSource}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{temp}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{n}{encodeCurrentChar}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{c}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fSource}\PYG{p}{[}\PYG{n}{fIndex}\PYG{p}{];}
+\PYG{+w}{    }\PYG{n}{fCurrentChar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{c}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{std}\PYG{o}{::}\PYG{n}{isalpha}\PYG{p}{(}\PYG{n}{c}\PYG{p}{))}\PYG{+w}{ }\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{isLower}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{islower}\PYG{p}{(}\PYG{n}{c}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{upperC}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{toupper}\PYG{p}{(}\PYG{n}{c}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{keyChar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{fKeys}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{encoded}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fMappingTable}\PYG{p}{[}\PYG{n}{keyChar}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{][}\PYG{n}{upperC}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{];}
+\PYG{+w}{    }\PYG{n}{fCurrentChar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{isLower}\PYG{+w}{ }\PYG{o}{?}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{tolower}\PYG{p}{(}\PYG{n}{encoded}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{encoded}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{fKeys}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fKeys}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{upperC}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{VigenereIterator}\PYG{o}{::}\PYG{n}{decodeCurrentChar}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{c}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fSource}\PYG{p}{[}\PYG{n}{fIndex}\PYG{p}{];}
+\PYG{+w}{    }\PYG{n}{fCurrentChar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{c}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{std}\PYG{o}{::}\PYG{n}{isalpha}\PYG{p}{(}\PYG{n}{c}\PYG{p}{))}\PYG{+w}{ }\PYG{k}{return}\PYG{p}{;}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{isLower}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{islower}\PYG{p}{(}\PYG{n}{c}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{upperC}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{toupper}\PYG{p}{(}\PYG{n}{c}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{keyChar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{fKeys}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{decoded}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{size\PYGZus{}t}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{CHARACTERS}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fMappingTable}\PYG{p}{[}\PYG{n}{keyChar}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{upperC}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{decoded}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}A\PYGZsq{}}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{fCurrentChar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{isLower}\PYG{+w}{ }\PYG{o}{?}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{tolower}\PYG{p}{(}\PYG{n}{decoded}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{decoded}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{fKeys}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fKeys}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{decoded}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

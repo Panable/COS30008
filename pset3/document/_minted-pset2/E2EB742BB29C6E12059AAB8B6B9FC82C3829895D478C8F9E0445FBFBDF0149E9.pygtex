@@ -1,0 +1,54 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{err}{\PYGZsh{}}\PYG{n}{include}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}FibonacciSequenceIterator.h\PYGZdq{}}
+
+\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{n}{FibonacciSequenceIterator}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{aSequence}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{uint64\PYGZus{}t}\PYG{+w}{ }\PYG{n}{aStart}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{+w}{    }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{fSequence}\PYG{p}{(}\PYG{n}{aSequence}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{fIndex}\PYG{p}{(}\PYG{n}{aStart}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fSequence}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{aStart}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{fSequence}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }
+\PYG{+w}{    }\PYG{k}{else}\PYG{+w}{ }\PYG{n+nf}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{fSequence}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{fSequence}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{begin}\PYG{p}{();}
+\PYG{+w}{        }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{uint64\PYGZus{}t}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{aStart}\PYG{p}{;}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{            }\PYG{o}{++}\PYG{p}{(}\PYG{n}{fSequence}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{uint64\PYGZus{}t}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{*}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{**}\PYG{n}{fSequence}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{FibonacciSequenceIterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{++}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{o}{++}\PYG{p}{(}\PYG{o}{*}\PYG{n}{fSequence}\PYG{p}{);}
+\PYG{+w}{    }\PYG{o}{++}\PYG{n}{fIndex}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{FibonacciSequenceIterator}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{++}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{FibonacciSequenceIterator}\PYG{+w}{ }\PYG{n}{old}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{o}{++}\PYG{p}{(}\PYG{o}{*}\PYG{k}{this}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{old}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{fIndex}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fIndex}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{FibonacciSequenceIterator}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nf}{FibonacciSequenceIterator}\PYG{p}{(}\PYG{n}{fSequence}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{FibonacciSequenceIterator}\PYG{+w}{ }\PYG{n}{FibonacciSequenceIterator}\PYG{p}{::}\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nf}{FibonacciSequenceIterator}\PYG{p}{(}\PYG{n}{fSequence}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{MAX\PYGZus{}FIBONACCI}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

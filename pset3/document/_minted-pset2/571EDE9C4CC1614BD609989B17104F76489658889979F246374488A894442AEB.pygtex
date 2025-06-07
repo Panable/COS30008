@@ -1,0 +1,51 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{err}{\PYGZsh{}}\PYG{n}{include}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}FibonacciSequence.h\PYGZdq{}}
+\PYG{err}{\PYGZsh{}}\PYG{n}{include}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{n}{cstdint}\PYG{o}{\PYGZgt{}}
+
+\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{n}{FibonacciSequence}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{+w}{    }\PYG{p}{:}\PYG{+w}{ }\PYG{n}{fPrevious}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{fCurrent}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{uint64\PYGZus{}t}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{*}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{fCurrent}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{FibonacciSequence}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{++}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{uint64\PYGZus{}t}\PYG{+w}{ }\PYG{n}{next}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fPrevious}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{fCurrent}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fPrevious}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{fCurrent}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fCurrent}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{next}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{FibonacciSequence}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{++}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{FibonacciSequence}\PYG{+w}{ }\PYG{n}{old}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{k}{this}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{o}{++}\PYG{p}{(}\PYG{o}{*}\PYG{k}{this}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{old}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{// Iterator must implement operator==. The operation != is synthesized.}
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{fCurrent}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fCurrent}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}
+\PYG{+w}{           }\PYG{n}{fPrevious}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{aOther}\PYG{p}{.}\PYG{n}{fPrevious}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k}{void}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{fPrevious}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fCurrent}\PYG{+w}{  }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{void}\PYG{+w}{ }\PYG{n}{FibonacciSequence}\PYG{p}{::}\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{noexcept}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{fPrevious}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fCurrent}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
