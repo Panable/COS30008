@@ -1,2 +1,2 @@
 #!/bin/sh
-make build && build/./lab
+make build && build/./lab src/Data.txt
