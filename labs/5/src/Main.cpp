@@ -5,9 +5,9 @@
 
 #include "DataWrapper.h"
 
-// #define P1
-// #define P2
-// #define P3
+#define P1
+#define P2
+#define P3
 
 #ifdef P1
 
@@ -151,6 +151,17 @@ int main( int argc, char* argv[] )
     
     auto lOrdering = [] ( const DataWrapper& aWrapper, size_t aIndex )  -> const DataMap&
                         {
+                            size_t i = 0;
+
+                            for ( ; i < aWrapper.size(); i++ )
+                            {
+                                if ( aWrapper[i].key() == aIndex )
+                                {
+                                    return aWrapper[i];
+                                }
+                            }
+                                
+                            return aWrapper[i];
                         };
         
     testP3( lWrapper, lOrdering );

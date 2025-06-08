@@ -44,7 +44,7 @@ int main( int argc, char* argv[] )
     }
 
     std::cout << "The perimeter of lPolygon is " << lPolygon.getPerimeter() << std::endl;
-        
+
     std::cout << "Scale polygon by 3.2:" << std::endl;
     
     Polygon lScaled = lPolygon.scale( 3.2f );

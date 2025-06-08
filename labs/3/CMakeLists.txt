@@ -14,4 +14,4 @@ file(GLOB_RECURSE SOURCES
         "src/*.cpp"
 )
 add_executable(lab ${SOURCES} )
-target_compile_options(lab PRIVATE -O0 -Wall -Wextra -ggdb)
+target_compile_options(lab PRIVATE -O0 -Wall)

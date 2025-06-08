@@ -1,4 +1,3 @@
-
 // COS30008 - Tutorial 1, 2025
 
 #include <cstddef>

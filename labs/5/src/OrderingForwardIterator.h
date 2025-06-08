@@ -25,20 +25,52 @@ public:
                                                      size_t aIndex ) -> const DataMap&
                                     {
                                         return aCollection[aIndex];
-                                    } ) noexcept;
+                                    } ) noexcept
+        : fCollection(aCollection), fOrdering(aOrdering), fIndex(0) 
+    {
+    }
 
     // Iterator must be const
-    const value_type& operator*() const noexcept;
+    const value_type& operator*() const noexcept
+    {
+        return fOrdering(*fCollection, fIndex);
+    }
     
-    iterator& operator++() noexcept;       // prefix
-    iterator operator++(int) noexcept;     // postfix
+    iterator& operator++() noexcept
+    {
+        fIndex++;
+        return *this;
+    }
+
+    iterator operator++(int) noexcept
+    {
+        iterator old = *this;
+        ++(*this);
+        return old;
+    }
 
     // Iterator must implement operator==. The operation != is synthesized.
-    bool operator==( const iterator& aOther ) const noexcept;
+    bool operator==( const iterator& aOther ) const noexcept
+    {
+        return (fCollection == aOther.fCollection && 
+                fIndex == aOther.fIndex);
+    }
     
     // Auxiliary methods not part of std::forward_iterator.
-    iterator begin() const noexcept;
-    iterator end() const noexcept;
+    iterator begin() const noexcept
+    {
+        iterator it = *this;
+        it.fIndex = 0;
+        return it;
+    }
+
+    iterator end() const noexcept
+    {
+        iterator it = *this;
+        if (fCollection)
+            it.fIndex = fCollection->size();
+        return it;
+    }
 
 private:
     
