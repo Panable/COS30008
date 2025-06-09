@@ -25,3 +25,5 @@
 13. What is the best-case, worst-case and average case lookup in a binary tree?
 
 14. What are reference data members and how do we initialize them?
+
+15. What is RAII and how is it leveraged in C++?
