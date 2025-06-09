@@ -6,8 +6,8 @@
 #include "BTree.h"
 #include "Visitors.h"
 
-//#define P1
-//#define P2
+#define P1
+#define P2
 
 #if defined(P1)
 
