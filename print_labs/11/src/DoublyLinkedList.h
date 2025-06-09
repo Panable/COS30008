@@ -21,36 +21,45 @@ struct DoublyLinkedList
     
     void link( node& aPrevious, node& aNext ) noexcept
     {
-        previous = aPrevious;
-        next = aNext;
+
+
+
+
+
+
     }
 
     void isolate() noexcept
     {
-        if (next)
-        {
-            next->previous = previous; //fine to do because weak_ptr
-        }
 
-        node lNode = previous.lock(); // weak_ptr must be converted to shared_ptr access obj
 
-        if (lNode)
-        {
-            lNode->next = next;
-        }
 
-        // manually set pointers to nullptr
-        previous.reset();
-        next.reset();
 
-        // lNode goes out of scope
+         
+
+
+
+
+                  
+         
+                               
+         
+
+                                           
+                         
+                     
+
+                                  
     }
 
     // factory method for list nodes
     template<typename... Args>
     static node makeNode( Args&&... args )
     {
-        // make_share<T, Args...>
-        return std::make_shared<DoublyLinkedList>( std::forward<Args>(args)... );
+
+
+
+
+
     }
 };
