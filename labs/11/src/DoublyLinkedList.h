@@ -19,8 +19,32 @@ struct DoublyLinkedList
     
     DoublyLinkedList( T&& aData ) noexcept : data(std::move(aData)) {}
     
-    void link( node& aPrevious, node& aNext ) noexcept; // link adjacent nodes
-    void isolate() noexcept;                            // unlink node
+    void link( node& aPrevious, node& aNext ) noexcept
+    {
+        previous = aPrevious;
+        next = aNext;
+    }
+
+    void isolate() noexcept
+    {
+        if (next)
+        {
+            next->previous = previous; //fine to do because weak_ptr
+        }
+
+        node lNode = previous.lock(); // weak_ptr must be converted to shared_ptr access obj
+
+        if (lNode)
+        {
+            lNode->next = next;
+        }
+
+        // manually set pointers to nullptr
+        previous.reset();
+        next.reset();
+
+        // lNode goes out of scope
+    }
 
     // factory method for list nodes
     template<typename... Args>
