@@ -1,0 +1,192 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{c+c1}{// COS30008, Tutorial 11, 2025}
+
+\PYG{c+cp}{\PYGZsh{}pragma once}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}cassert\PYGZgt{}}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}DoublyLinkedList.h\PYGZdq{}}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{DoublyLinkedListIterator}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{iterator}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DoublyLinkedListIterator}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{node}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DoublyLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}::}\PYG{n}{node}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{difference\PYGZus{}type}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{k+kt}{ptrdiff\PYGZus{}t}\PYG{p}{;}\PYG{+w}{                     }\PYG{c+c1}{// to satisfy concept weakly\PYGZus{}incrementable}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{value\PYGZus{}type}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{T}\PYG{p}{;}\PYG{+w}{                                       }\PYG{c+c1}{// to satisfy concept indirectly\PYGZus{}readable}
+
+\PYG{+w}{    }\PYG{k}{enum}\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{States}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{BEFORE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{DATA}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{AFTER}\PYG{+w}{ }\PYG{p}{\PYGZcb{};}
+
+\PYG{+w}{    }\PYG{n}{DoublyLinkedListIterator}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{fState}\PYG{p}{(}\PYG{n}{States}\PYG{o}{::}\PYG{n}{AFTER}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{DoublyLinkedListIterator}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{node}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aHead}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{node}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aTail}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                               }
+\PYG{+w}{        }
+
+
+
+\PYG{+w}{                                               }
+\PYG{+w}{                                 }
+
+\PYG{+w}{                                   }
+\PYG{+w}{         }
+\PYG{+w}{                                   }
+\PYG{+w}{         }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{*}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+
+
+
+
+
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{++}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                     }
+
+
+\PYG{+w}{         }
+\PYG{+w}{                              }
+\PYG{+w}{                                  }
+\PYG{+w}{         }
+\PYG{+w}{                                        }
+\PYG{+w}{         }
+\PYG{+w}{                                        }
+\PYG{+w}{         }
+
+\PYG{+w}{                                                     }
+\PYG{+w}{         }
+\PYG{+w}{                                    }
+\PYG{+w}{         }
+
+\PYG{+w}{                     }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{++}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                             }
+
+
+
+
+
+\PYG{+w}{                  }
+
+\PYG{+w}{                   }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                    }
+\PYG{+w}{         }
+\PYG{+w}{                              }
+
+
+
+\PYG{+w}{                                  }
+\PYG{+w}{         }
+\PYG{+w}{                                        }
+\PYG{+w}{         }
+\PYG{+w}{                                                   }
+\PYG{+w}{         }
+
+\PYG{+w}{                                                     }
+\PYG{+w}{         }
+\PYG{+w}{                                     }
+\PYG{+w}{         }
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                             }
+
+
+
+
+\PYG{+w}{                  }
+
+\PYG{+w}{                   }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{==}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{iterator}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aOther}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{               }
+
+\PYG{+w}{                                        }
+\PYG{+w}{                                        }
+\PYG{+w}{                                            }
+\PYG{+w}{                                       }
+\PYG{+w}{         }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                           }
+
+
+
+\PYG{+w}{                              }
+\PYG{+w}{                                }
+\PYG{+w}{                 }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                           }
+
+
+
+\PYG{+w}{                                              }
+\PYG{+w}{                                 }
+\PYG{+w}{                 }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{rbegin}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+
+
+
+\PYG{+w}{    }\PYG{n}{iterator}\PYG{+w}{ }\PYG{n}{rend}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{node}\PYG{+w}{   }\PYG{n}{fHead}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{node}\PYG{+w}{   }\PYG{n}{fTail}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{node}\PYG{+w}{   }\PYG{n}{fPosition}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{States}\PYG{+w}{ }\PYG{n}{fState}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{concept}\PYG{+w}{ }\PYG{n+nc}{BasicBidirectionalIterator}\PYG{+w}{ }\PYG{o}{=}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{bidirectional\PYGZus{}iterator}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}
+\PYG{k}{requires}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{T}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{T}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{.}\PYG{n}{begin}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{same\PYGZus{}as}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{.}\PYG{n}{end}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{same\PYGZus{}as}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{static\PYGZus{}assert}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{BasicBidirectionalIterator}\PYG{o}{\PYGZlt{}}\PYG{n}{DoublyLinkedListIterator}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{);}
+\end{Verbatim}

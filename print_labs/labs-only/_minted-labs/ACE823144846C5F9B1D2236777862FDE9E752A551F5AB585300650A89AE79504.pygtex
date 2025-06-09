@@ -1,0 +1,67 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{c+c1}{// COS30008, Tutorial 11, 2025}
+
+\PYG{c+cp}{\PYGZsh{}pragma once}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}memory\PYGZgt{}}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{DoublyLinkedList}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{node}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{DoublyLinkedList}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{node\PYGZus{}w}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{weak\PYGZus{}ptr}\PYG{o}{\PYGZlt{}}\PYG{n}{DoublyLinkedList}\PYG{o}{\PYGZgt{}}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{T}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{node}\PYG{+w}{ }\PYG{n}{next}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{node\PYGZus{}w}\PYG{+w}{ }\PYG{n}{previous}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{DoublyLinkedList}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aData}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{(}\PYG{n}{aData}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{n}{DoublyLinkedList}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{aData}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{move}\PYG{p}{(}\PYG{n}{aData}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{link}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{node}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aPrevious}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{node}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aNext}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+
+
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{isolate}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{noexcept}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+
+
+\PYG{+w}{         }
+
+
+
+
+\PYG{+w}{                  }
+\PYG{+w}{         }
+\PYG{+w}{                               }
+\PYG{+w}{         }
+
+\PYG{+w}{                                           }
+\PYG{+w}{                         }
+\PYG{+w}{                     }
+
+\PYG{+w}{                                  }
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// factory method for list nodes}
+\PYG{+w}{    }\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{p}{...}\PYG{+w}{ }\PYG{n}{Args}\PYG{o}{\PYGZgt{}}
+\PYG{+w}{    }\PYG{k}{static}\PYG{+w}{ }\PYG{n}{node}\PYG{+w}{ }\PYG{n}{makeNode}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{Args}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{p}{...}\PYG{+w}{ }\PYG{n}{args}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

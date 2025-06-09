@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{c+c1}{// COS30008, Tutorial 12, 2025}
+
+\PYG{c+cp}{\PYGZsh{}pragma once}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZdq{}Visitors.h\PYGZdq{}}
+
+\PYG{k}{template}\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{TreeDecorator}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{public}\PYG{+w}{ }\PYG{n}{TreeVisitor}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{     }\PYG{c+c1}{// \PYGZob{} 25 \PYGZob{} 10 \PYGZob{}\PYGZcb{} \PYGZob{} 15 \PYGZob{}\PYGZcb{} \PYGZob{}\PYGZcb{} \PYGZcb{}  \PYGZcb{}  \PYGZob{} 37 \PYGZob{} 30 \PYGZob{}\PYGZcb{} \PYGZob{}\PYGZcb{} \PYGZcb{}  \PYGZob{} 65 \PYGZob{}\PYGZcb{} \PYGZob{}\PYGZcb{} \PYGZcb{}  \PYGZcb{}  \PYGZcb{}}
+
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{emitEmpty}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{+w}{ }\PYG{k}{override}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// override pre\PYGZhy{}order behavior}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{preVisit}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aKey}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{+w}{ }\PYG{k}{override}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{c+c1}{// override post\PYGZhy{}order behavior}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{postVisit}\PYG{p}{(}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{aKey}\PYG{+w}{ }\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{noexcept}\PYG{+w}{ }\PYG{k}{override}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+
+
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

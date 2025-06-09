@@ -1,0 +1,56 @@
+\documentclass[11pt, letterpaper]{article}
+\pagestyle{empty}
+\usepackage[a4paper, margin=1cm]{geometry} % Adjust margins as needed
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage[most]{tcolorbox}
+\usepackage{etoolbox}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{tikz}
+\usepackage[md]{titlesec}
+\setminted{fontsize=\large}
+\usemintedstyle{bw}
+\newcommand{\includeminted}[3]
+{
+  \begin{center}
+  \textbf{#1}
+  \vspace{-5pt}
+  \inputminted[linenos, breaklines]{#2}{#3}
+  \end{center}
+}
+
+\newcommand{\mintbox}[3]
+{
+  \begin{center}
+  \textbf{#1}
+  \vspace{-5pt}
+  \begin{tcolorbox}
+  \inputminted[]{#2}{#3}
+  \end{tcolorbox}
+  \end{center}
+}
+
+\title{Exam revision}
+\author{}
+\date{}
+
+\begin{document}
+\normalsize
+\section{Lab 10}
+\includeminted{Figure 1: Array.h}{cpp}{../10/src/Array.h}
+\clearpage
+\section{Lab 11}
+\includeminted{Figure 2: DoublyLinkedList.h}{cpp}{../11/src/DoublyLinkedList.h}
+\clearpage
+\includeminted{Figure 3: DoublyLinkedListIterator.h}{cpp}{../11/src/DoublyLinkedListIterator.h}
+\clearpage
+\section{Lab 12}
+\includeminted{Figure 4: BTree.h}{cpp}{../12/src/BTree.h}
+\clearpage
+\includeminted{Figure 5: TreeDecorator.h}{cpp}{../12/src/TreeDecorator.h}
+\clearpage
+\end{document}
