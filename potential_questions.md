@@ -10,4 +10,18 @@
 
 6. What are the dangers of using circular references with `shared_ptr`?
 
-7. 
+7. How can we construct a tree where all nodes have the same degree?
+
+8. What is the difference between l-value references and r-value references?
+
+9. What is a key concept of abstract data types?
+
+10. What must a value-based data type define in C++?
+
+11. What is an object adapter?
+
+12. What is the difference between copy constructor and assignment operator and how do we gurantee safe function?
+
+13. What is the best-case, worst-case and average case lookup in a binary tree?
+
+14. What are reference data members and how do we initialize them?
