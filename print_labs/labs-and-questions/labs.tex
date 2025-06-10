@@ -53,6 +53,14 @@
 \clearpage
 \includeminted{Figure 5: TreeDecorator.h}{cpp}{../12/src/TreeDecorator.h}
 \clearpage
+\section{Lab 8 - optional}
+\includeminted{Figure 6: DynamicStack.h}{cpp}{../8/src/DynamicStack.h}
+\clearpage
+\section{Lab 6 - optional}
+\includeminted{Figure 7: ArraySorter.h}{cpp}{../6/src/ArraySorter.h}
+\clearpage
+\includeminted{Figure 8: BubbleSorter.h}{cpp}{../6/src/BubbleSorter.h}
+\clearpage
 \section*{Revision Questions}
 \setlength{\parskip}{0.5em}
 
@@ -117,6 +125,8 @@
   \item What is the difference between copy constructor and assignment operator and how do we guarantee safe function?
     \begin{answerspace}
     \end{answerspace}
+    
+    \clearpage
 
   \item What is the best-case, worst-case and average case lookup in a binary tree?
     \begin{answerspace}
@@ -127,6 +137,82 @@
     \end{answerspace}
 
   \item What is RAII and how is it leveraged in C++?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is the slowest time order?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is Amortized Analysis?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is the time complexity of a stack push?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is the time complexity of a stack pop?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is the time complexity of pop(k), where k = num elements to pop?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How do you use aggregate method for calculating amortized cost?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How do you use aggregate method for calculating amortized cost?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is the Amortized cost of pop(k)?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How do you calculate load factor?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How can you implement queue with an Array?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is a sentinel object/node?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What data structure would you use to perform DFS?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What data structure would you use to perform BFS?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What is a frontier node?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How to implement post-order with stack?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How to implement in-order with stack?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How to insert a number into a BST?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item How to delete a number in BST?
+    \begin{answerspace}
+    \end{answerspace}
+
+  \item What type of tree traversal yields sorted values in BST?
     \begin{answerspace}
     \end{answerspace}
 
@@ -147,6 +233,7 @@ For each tree below, write the \textbf{node number} inside each circle according
 
 \vspace{2em}
 
+% Tree A
 \newcommand{\binarytree}{
 \begin{center}
 \begin{tikzpicture}[level distance=1.7cm,
@@ -155,21 +242,74 @@ For each tree below, write the \textbf{node number} inside each circle according
   every node/.append style={circle,draw,minimum size=1cm, font=\large, fill=white, text=black},
   edge from parent/.style={draw,thick}]
 \node {} % root
-  child { node {} % left child of root
-    child { % left subtree: left child
-      node {} % left child
-        child[missing] % no left child
-        child { node {} } % right child only
+  child { node {} 
+    child { node {} 
+      child[missing]
+      child { node {} } 
     }
-    child { node {} } % right child of left
+    child { node {} } 
   }
-  child { node {} % right child of root
-    child { node {} } % left
-    child { % right subtree: right child
-      node {}
-        child { node {} }
-        child { node {} }
+  child { node {} 
+    child { node {} } 
+    child { node {} 
+      child { node {} } 
+      child { node {} } 
     }
+  };
+\end{tikzpicture}
+\end{center}
+}
+
+% Tree B
+\newcommand{\binarytreeA}{
+\begin{center}
+\begin{tikzpicture}[level distance=1.7cm,
+  level 1/.style={sibling distance=4.5cm},
+  level 2/.style={sibling distance=2.5cm},
+  every node/.append style={circle,draw,minimum size=1cm, font=\large, fill=white, text=black},
+  edge from parent/.style={draw,thick}]
+\node {}
+  child { node {}
+    child { node {} 
+      child { node {} } 
+      child[missing] 
+    }
+    child { node {} }
+  }
+  child { node {}
+    child[missing]
+    child { node {} 
+      child { node {} }
+      child[missing]
+    }
+  };
+\end{tikzpicture}
+\end{center}
+}
+
+% Tree C
+\newcommand{\binarytreeB}{
+\begin{center}
+\begin{tikzpicture}[level distance=1.6cm,
+  level 1/.style={sibling distance=4.8cm},
+  level 2/.style={sibling distance=2cm},
+  level 3/.style={sibling distance=1.3cm},
+  every node/.append style={circle,draw,minimum size=1cm, font=\large, fill=white, text=black},
+  edge from parent/.style={draw,thick}]
+\node {}
+  child { node {}
+    child { node {} 
+      child { node {} } 
+      child { node {} } 
+    }
+    child[missing]
+  }
+  child { node {} 
+    child { node {} 
+      child[missing] 
+      child { node {} }
+    }
+    child { node {} }
   };
 \end{tikzpicture}
 \end{center}
@@ -178,12 +318,16 @@ For each tree below, write the \textbf{node number} inside each circle according
 % Pre-order Tree
 \subsection*{1. Pre-order Traversal}
 \binarytree
+\binarytreeA
+\binarytreeB
 \vspace{1.5cm}
 
 
 % In-order Tree
 \subsection*{2. In-order Traversal}
 \binarytree
+\binarytreeA
+\binarytreeB
 \vspace{1.5cm}
 
 \clearpage
@@ -191,6 +335,85 @@ For each tree below, write the \textbf{node number} inside each circle according
 % Post-order Tree
 \subsection*{3. Post-order Traversal}
 \binarytree
-\vspace{1.5cm}
+\binarytreeA
+\binarytreeB
 
+% Massive tree diagram + structural analysis questions
+\clearpage
+\section*{Tree Analysis Practice}
+
+\noindent
+\textbf{Instructions:} Use the tree diagram below to answer the following questions about its structure.
+
+\vspace{1em}
+
+% Massive Tree
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm,
+  level 1/.style={sibling distance=8cm},
+  level 2/.style={sibling distance=4cm},
+  level 3/.style={sibling distance=2.5cm},
+  level 4/.style={sibling distance=1.5cm},
+  level 5/.style={sibling distance=1.2cm},
+  level 6/.style={sibling distance=1cm},
+  every node/.append style={circle,draw,minimum size=1cm, font=\large, fill=white, text=black},
+  edge from parent/.style={draw,thick}]
+\node {A} % root
+  child { node {B}
+    child { node {D}
+      child { node {H}
+        child { node {P} }
+        child[missing]
+      }
+      child { node {I} }
+    }
+    child { node {E}
+      child { node {J} }
+      child { node {K}
+        child[missing]
+        child { node {Q} }
+      }
+    }
+  }
+  child { node {C}
+    child { node {F}
+      child { node {L} }
+      child { node {M}
+        child { node {R} }
+        child[missing]
+      }
+    }
+    child { node {G}
+      child { node {N} }
+      child { node {O}
+        child { node {S}
+          child[missing]
+          child { node {T} }
+        }
+        child[missing]
+      }
+    }
+  };
+\end{tikzpicture}
+\end{center}
+
+\vspace{1em}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+  \item What is the \textbf{root node}?
+  \item List all the \textbf{leaf nodes}.
+  \item What is the \textbf{degree} of node B?
+  \item What is the \textbf{degree} of node G?
+  \item What is the \textbf{depth} of node L?
+  \item What is the \textbf{height} of node B?
+  \item What is the \textbf{height} of the entire tree?
+  \item How many \textbf{edges} are in the tree?
+  \item What is the \textbf{path length} from A to M?
+  \item What is the \textbf{total number of nodes} in the tree?
+  \item How many \textbf{internal nodes} (nodes that are not leaves) are there?
+  \item Which node has the \textbf{maximum degree}?
+  \item What is the \textbf{subtree rooted at E}?
+  \item What is the \textbf{minimum number of levels} needed to fit this tree?
+  \item What type of \textbf{tree traversal} would visit the nodes in the order: A, B, D, H, P, I, E, J, K, Q, C, F, L, M, R, G, N, O, S, T?
+\end{enumerate}
 \end{document}

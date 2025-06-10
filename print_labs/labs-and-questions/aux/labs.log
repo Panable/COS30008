@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.3.26)  10 JUN 2025 08:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.3.26)  10 JUN 2025 20:30
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -805,23 +805,55 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
 
 [15
 
-]
+] (./_minted-labs/02E6D3D28CC45F889ED7337F0DE2266245923F6B6B94780AACB564D0F7299642.pygtex
 
 [16
 
 ]
 
-[17
+[17])
 
-]
-
-[18]
+[18] (./_minted-labs/56F491D1B24B138163D495C0692D89ADF99E3C2EF37B855CEA1ED783D3890E93.pygtex
 
 [19
 
+])
+
+[20] (./_minted-labs/CFDB8D89F98C8EE4FE5D5D78276E6821B7AB67BB23D0BF81F5EAAEF2F313C67A.pygtex)
+
+[21
+
 ]
 
-[20
+[22
+
+]
+
+[23
+
+]
+
+[24
+
+]
+
+[25]
+
+[26]
+
+[27]
+
+[28
+
+]
+
+[29]
+
+[30
+
+]
+
+[31
 
 ] (aux/labs.aux)
  ***********
@@ -830,18 +862,18 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 26797 strings out of 475171
- 568605 string characters out of 5767095
- 1066248 words of memory out of 5000000
- 49309 multiletter control sequences out of 15000+600000
+ 27341 strings out of 475171
+ 582305 string characters out of 5767095
+ 1073940 words of memory out of 5000000
+ 49844 multiletter control sequences out of 15000+600000
  562806 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,12n,105p,1001b,1273s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,16n,105p,1001b,1677s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on aux/labs.pdf (20 pages, 129876 bytes).
+Output written on aux/labs.pdf (31 pages, 154494 bytes).
 PDF statistics:
- 153 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
+ 189 PDF objects out of 1000 (max. 8388607)
+ 112 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  14493 words of extra memory for PDF output out of 17280 (max. 10000000)
 
